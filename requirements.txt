@@ -1,2 +1,2 @@
 opencv-python-headless
-simple_image_download
+simple-image-download
