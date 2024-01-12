@@ -143,13 +143,14 @@ def c_filter(image_path, kernel, output_directory):
         print(f"Error al ejecutar el programa C: {e}")
 
 
-def open_mp_filter(image_path, kernel, output_directory):
+def open_mp_filter(image_path, kernel, num_cores, output_directory):
     # Definir el comando para ejecutar el programa C
     command = [
         "./open_mp_filter/open_mp_filter_program",  # Nombre del programa C
         image_path,  # Directorio de imágenes
         kernel,  # Tipo de kernel
         output_directory,  # Directorio de salida
+        str(num_cores),
     ]
 
     try:
@@ -170,9 +171,9 @@ query = st.text_input("Tema específico")
 
 # Número de cores/hilos/procesos
 num_images_per_thread = st.slider(
-    "Número de imagenes por hilo",
+    "Número de imagenes por hilo (10 hilos)",
     min_value=1,
-    max_value=100,
+    max_value=1000,
     value=1,
 )
 
@@ -346,7 +347,7 @@ if st.button("Iniciar Procesamiento"):
         c_filter(images_directory, kernel_type, output_folder)
 
     elif selected_language == openmp_option:
-        open_mp_filter(images_directory, kernel_type, output_folder)
+        open_mp_filter(images_directory, kernel_type, num_cores, output_folder)
 
     end_time = time.time()  # Tiempo de finalización
 

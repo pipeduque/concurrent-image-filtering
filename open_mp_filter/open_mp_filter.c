@@ -82,14 +82,17 @@ void apply_filter(const char* input_path, const char* output_path, int kernel[5]
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 4) {
-        printf("Uso: %s <directorio_imagenes> <kernel_type> <output_directory>\n", argv[0]);
+    if (argc != 5) {
+        printf("Uso: %s <directorio_imagenes> <kernel_type> <output_directory> <num_threads>\n", argv[0]);
         return 1;
     }
 
     const char* images_directory = argv[1];
     const char* kernel_type = argv[2];
-    const char* output_directory = argv[3];
+    const char* output_directory = argv[3];   
+    const int num_threads = atoi(argv[4]);
+ 
+    printf("%d", num_threads);
 
     // Definición del kernel según el tipo de filtro seleccionado
     int kernel[5][5];
@@ -129,9 +132,6 @@ int main(int argc, char* argv[]) {
     }
 
     struct dirent* entry;
-
-    // Obtener el número de hilos disponibles
-    int num_threads = omp_get_max_threads();
 
     #pragma omp parallel for num_threads(num_threads)
     for (int i = 0; i < num_threads; ++i) {
