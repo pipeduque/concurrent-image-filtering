@@ -26,6 +26,7 @@ multiprocessing_option = "multiprocessing"
 mpi4py_option = "mpi4py"
 c_option = "c"
 openmp_option = "openmp"
+goroutines_option = "goroutines"
 
 
 def download_images(query, start_index, num_images):
@@ -163,6 +164,26 @@ def open_mp_filter(image_path, kernel, num_cores, output_directory):
         print(f"Error al ejecutar el programa C: {e}")
 
 
+def goroutines_filter(image_path, kernel, num_routines, output_directory):
+    # Definir el comando para ejecutar el programa C
+    command = [
+        "./go_filter/go_filter",
+        image_path,
+        kernel,
+        output_directory,
+        str(num_routines),
+    ]
+
+    try:
+        result = subprocess.run(
+            command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+        )
+        print("Salida estándar:", result.stdout)
+        print("Error estándar:", result.stderr)
+    except Exception as e:
+        print(f"Error al ejecutar el programa go: {e}")
+
+
 # Configuración de Streamlit
 st.title("Descarga Concurrente de Imágenes")
 
@@ -295,14 +316,10 @@ elif kernel_type == prewitt_vertical:
 elif kernel_type == prewitt_horizontal:
     kernel = np.array([[-1, -1, -1], [0, 0, 0], [1, 1, 1]])
 
-# Selección del tipo de procesamiento concurrente
-concurrent_type = st.radio(
-    "Seleccione el tipo de procesamiento concurrente:", ["Hilos", "Procesos"]
-)
 
 # Número de cores/hilos/procesos
 num_cores = st.slider(
-    "Número de Cores/Hilos/Procesos:",
+    "Número de Cores/Hilos/Procesos/Goroutines",
     min_value=1,
     max_value=os.cpu_count(),
     value=1,
@@ -316,7 +333,14 @@ output_directory = "./outputs"
 # Determinar el tipo de lenguaje/framework seleccionado
 selected_language = st.selectbox(
     "Seleccione el lenguaje/framework:",
-    [python_option, multiprocessing_option, mpi4py_option, c_option, openmp_option],
+    [
+        python_option,
+        multiprocessing_option,
+        mpi4py_option,
+        c_option,
+        openmp_option,
+        goroutines_option,
+    ],
 )
 
 # Botón para iniciar el procesamiento
@@ -348,6 +372,9 @@ if st.button("Iniciar Procesamiento"):
 
     elif selected_language == openmp_option:
         open_mp_filter(images_directory, kernel_type, num_cores, output_folder)
+
+    elif selected_language == goroutines_option:
+        goroutines_filter(images_directory, kernel_type, num_cores, output_folder)
 
     end_time = time.time()  # Tiempo de finalización
 
