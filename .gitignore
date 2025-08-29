@@ -1,0 +1,150 @@
+# Binarios ejecutables compilados
+go_filter/go_filter
+c_filter/c_filter_program
+open_mp_filter/open_mp_filter_program
+
+# Archivos de salida generados
+outputs/
+*.jpg
+*.png
+*.bmp
+*.tiff
+*.gif
+
+# Entorno virtual de Python
+.venv/
+venv/
+env/
+ENV/
+**/site-packages/
+**/lib/python*/site-packages/
+**/lib/
+**/include/
+**/bin/
+**/share/
+**/etc/
+
+# Archivos de Python
+.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Archivos de Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Archivos de C/C++
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.dSYM/
+*.dylib
+*.so
+*.a
+*.lib
+
+# Archivos del sistema operativo
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archivos de IDE y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Archivos de logs
+*.log
+logs/
+
+# Archivos temporales
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Archivos de configuración local
+.env*
+*.env
+
+# Archivos de caché
+.cache/
+*.cache
+
+# Archivos de backup
+*.bak
+*.backup
+*.old
+
+# Archivos de datos temporales
+*.dat
+*.data
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de compilación de Make
+*.d
+*.mk
+*.make
+
+# Archivos específicos de MPI
+*.mpi
+*.mpi.out
+
+# Archivos de profiling y debugging
+*.prof
+*.trace
+*.debug
+*.gprof
+*.gcov
+
+# Archivos de coverage
+*.gcda
+*.gcno
+coverage/
+.coverage
+htmlcov/
+
+# Archivos de testing
+.pytest_cache/
+.tox/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/
